@@ -28,7 +28,7 @@ class LogoutTest extends TestCase
         $token = $this->user->createToken($this->user->name)->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->post(route('logout'));
 
         $response->assertStatus(200)
