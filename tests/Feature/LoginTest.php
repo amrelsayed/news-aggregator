@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -13,7 +12,7 @@ class LoginTest extends TestCase
 
     protected $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -30,7 +29,7 @@ class LoginTest extends TestCase
         // Arrange
         $response = $this->postJson(route('login'), [
             'email' => $this->user->email,
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         // Assert
@@ -41,7 +40,7 @@ class LoginTest extends TestCase
                     'id',
                     'name',
                     'email',
-                    'created_at'
+                    'created_at',
                 ],
             ]);
     }
@@ -50,7 +49,7 @@ class LoginTest extends TestCase
     {
         $response = $this->postJson(route('login'), [
             'email' => $this->user->email,
-            'password' => 'passwordsdf'
+            'password' => 'passwordsdf',
         ]);
 
         $response->assertStatus(422)
@@ -60,7 +59,7 @@ class LoginTest extends TestCase
     public function test_login_fails_with_missing_email(): void
     {
         $response = $this->postJson(route('login'), [
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertStatus(422)
@@ -70,7 +69,7 @@ class LoginTest extends TestCase
     public function test_login_fails_with_missing_password(): void
     {
         $response = $this->postJson(route('login'), [
-            'email' => $this->user->email
+            'email' => $this->user->email,
         ]);
 
         $response->assertStatus(422)
