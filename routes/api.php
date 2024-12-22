@@ -13,4 +13,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/articles', [ArticleController::class, 'index'])->name('article.index');
+    Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('article.show');
 });

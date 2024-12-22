@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Article\ListArticlesAction;
 use App\Http\Resources\ArticleResource;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -14,6 +15,7 @@ class ArticleController extends Controller
      *     summary="Get a list of articles",
      *     description="Retrieve a paginated list of articles with optional filters",
      *     tags={"Articles"},
+     *     security={{"sanctum": {}}},
      *
      *     @OA\Parameter(
      *         name="keyword",
@@ -102,5 +104,53 @@ class ArticleController extends Controller
         $articles = $listArticlesAction->excute($request->all());
 
         return ArticleResource::collection($articles);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/articles/{id}",
+     *     summary="Get article by ID",
+     *     description="Get article details",
+     *     tags={"Articles"},
+     *     security={{"sanctum": {}}},
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the article",
+     *         required=true,
+     *
+     *         @OA\Schema(type="integer")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response with article details",
+     *
+     *         @OA\JsonContent(
+     *             type="object",
+     *
+     *             @OA\Property(
+     *                 property="data",
+     *                 ref="#/components/schemas/Article"
+     *             )
+     *         )
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=404,
+     *         description="Article not found"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
+     *     )
+     * )
+     */
+    public function show(Request $request, Article $article): ArticleResource
+    {
+        $article->load(['category', 'author', 'source']);
+
+        return new ArticleResource($article);
     }
 }
