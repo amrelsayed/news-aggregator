@@ -4,11 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Tests\TestCase;
 use Mockery;
+use Tests\TestCase;
 
 class ResetPasswordTest extends TestCase
 {
@@ -52,7 +51,7 @@ class ResetPasswordTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => "Your password has been reset."
+                'message' => 'Your password has been reset.',
             ]);
     }
 
@@ -71,6 +70,7 @@ class ResetPasswordTest extends TestCase
                 $this->assertEquals($data['token'], $credentials['token']);
                 $this->assertEquals($data['email'], $credentials['email']);
                 $this->assertEquals($data['password'], $credentials['password']);
+
                 return true;
             })
             ->andReturn(Password::INVALID_TOKEN);
@@ -79,7 +79,7 @@ class ResetPasswordTest extends TestCase
 
         $response->assertStatus(400)
             ->assertJson([
-                'message' => "This password reset token is invalid."
+                'message' => 'This password reset token is invalid.',
             ]);
     }
 

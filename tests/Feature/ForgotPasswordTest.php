@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Password;
 use Tests\TestCase;
 
@@ -27,7 +26,7 @@ class ForgotPasswordTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => "We have emailed your password reset link.",
+                'message' => 'We have emailed your password reset link.',
             ]);
     }
 
@@ -75,7 +74,7 @@ class ForgotPasswordTest extends TestCase
 
         $response->assertStatus(400)
             ->assertJson([
-                'message' => "Please wait before retrying."
+                'message' => 'Please wait before retrying.',
             ]);
     }
 }
