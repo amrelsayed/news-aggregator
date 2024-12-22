@@ -15,15 +15,15 @@ class ArticleTest extends TestCase
         $article = Article::factory()->create();
 
         $this->assertEquals([
-            "title",
-            "content",
-            "category_id",
-            "author_id",
-            "source_id",
-            "published_at",
-            "updated_at",
-            "created_at",
-            "id"
+            'title',
+            'content',
+            'category_id',
+            'author_id',
+            'source_id',
+            'published_at',
+            'updated_at',
+            'created_at',
+            'id',
         ], array_keys($article->toArray()));
     }
 }

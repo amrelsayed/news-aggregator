@@ -15,10 +15,10 @@ class AuthorTest extends TestCase
         $author = Author::factory()->create();
 
         $this->assertEquals([
-            "name",
-            "updated_at",
-            "created_at",
-            "id"
+            'name',
+            'updated_at',
+            'created_at',
+            'id',
         ], array_keys($author->toArray()));
     }
 }

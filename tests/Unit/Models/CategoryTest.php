@@ -15,10 +15,10 @@ class CategoryTest extends TestCase
         $category = Category::factory()->create();
 
         $this->assertEquals([
-            "name",
-            "updated_at",
-            "created_at",
-            "id"
+            'name',
+            'updated_at',
+            'created_at',
+            'id',
         ], array_keys($category->toArray()));
     }
 }

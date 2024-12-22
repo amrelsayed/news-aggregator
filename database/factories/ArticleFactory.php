@@ -25,7 +25,7 @@ class ArticleFactory extends Factory
             'category_id' => Category::factory(),
             'author_id' => Author::factory(),
             'source_id' => Source::factory(),
-            'published_at' => fake()->dateTimeBetween('-1 year', 'now')
+            'published_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

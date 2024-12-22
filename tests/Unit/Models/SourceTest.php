@@ -15,10 +15,10 @@ class SourceTest extends TestCase
         $source = Source::factory()->create();
 
         $this->assertEquals([
-            "name",
-            "updated_at",
-            "created_at",
-            "id"
+            'name',
+            'updated_at',
+            'created_at',
+            'id',
         ], array_keys($source->toArray()));
     }
 }

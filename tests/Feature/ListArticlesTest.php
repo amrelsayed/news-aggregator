@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Article;
-use App\Models\Category;
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\Source;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +16,7 @@ class ListArticlesTest extends TestCase
 
     protected User $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -77,7 +77,7 @@ class ListArticlesTest extends TestCase
         $category = Category::factory()->create();
         Article::factory()->create(['category_id' => $category->id]);
 
-        $response = $this->actingAs($this->user)->getJson('/api/articles?category_id=' . $category->id);
+        $response = $this->actingAs($this->user)->getJson('/api/articles?category_id='.$category->id);
 
         $response->assertStatus(200)
             ->assertJsonCount(1, 'data')
@@ -89,7 +89,7 @@ class ListArticlesTest extends TestCase
         $author = Author::factory()->create();
         Article::factory()->create(['author_id' => $author->id]);
 
-        $response = $this->actingAs($this->user)->getJson('/api/articles?author_id=' . $author->id);
+        $response = $this->actingAs($this->user)->getJson('/api/articles?author_id='.$author->id);
 
         $response->assertStatus(200)
             ->assertJsonCount(1, 'data')
@@ -101,7 +101,7 @@ class ListArticlesTest extends TestCase
         $source = Source::factory()->create();
         Article::factory()->create(['source_id' => $source->id]);
 
-        $response = $this->actingAs($this->user)->getJson('/api/articles?source_id=' . $source->id);
+        $response = $this->actingAs($this->user)->getJson('/api/articles?source_id='.$source->id);
 
         $response->assertStatus(200)
             ->assertJsonCount(1, 'data')

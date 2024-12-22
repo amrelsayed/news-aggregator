@@ -11,6 +11,6 @@ class Source extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
     ];
 }
