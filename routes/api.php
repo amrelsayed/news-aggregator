@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
@@ -10,4 +11,6 @@ Route::post('reset-password', [ResetPasswordController::class, 'resetPassword'])
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/articles', [ArticleController::class, 'index'])->name('article.index');
 });

@@ -10,9 +10,6 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic unit test example.
-     */
     public function test_model_has_expected_fields(): void
     {
         $user = User::factory()->create();
