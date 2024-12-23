@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Preference\GetUserPreferencesAction;
 use App\Actions\Preference\SetUserPreferenceAction;
 use App\Http\Requests\AddPreferenceRequest;
 use App\Http\Resources\PreferenceResource;
@@ -40,9 +41,9 @@ class PreferenceController extends Controller
      *     )
      * )
      */
-    public function index(): AnonymousResourceCollection
+    public function index(GetUserPreferencesAction $getUserPreferencesAction): AnonymousResourceCollection
     {
-        $preferences = Auth::user()->preferences()->with('preferencable')->get();
+        $preferences = $getUserPreferencesAction->execute();
 
         return PreferenceResource::collection($preferences);
     }
