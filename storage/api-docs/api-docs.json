@@ -298,6 +298,109 @@
                 ]
             }
         },
+        "/api/preferences": {
+            "get": {
+                "tags": [
+                    "Preferences"
+                ],
+                "summary": "Get user preferences",
+                "description": "Get list of user preferences",
+                "operationId": "f1eb50f3bfb30dde3ed40dac8f0e1780",
+                "responses": {
+                    "200": {
+                        "description": "User preferences retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Preference"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Preferences"
+                ],
+                "summary": "Set user preference",
+                "description": "Create or update user preference",
+                "operationId": "1a3e7b639a919481e5e3f12364358007",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "preferencable_id",
+                                    "preferencable_type"
+                                ],
+                                "properties": {
+                                    "preferencable_id": {
+                                        "description": "ID of the preferencable",
+                                        "type": "integer"
+                                    },
+                                    "preferencable_type": {
+                                        "description": "Type of the preferencable entity",
+                                        "type": "string",
+                                        "enum": [
+                                            "category",
+                                            "author",
+                                            "source"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Preference created/updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Preference"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request - Invalid input data"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/forgot-password": {
             "post": {
                 "tags": [
@@ -581,6 +684,44 @@
                 },
                 "type": "object"
             },
+            "Preference": {
+                "title": "Preference Resource",
+                "description": "Preference resource representation",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "preferencable_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "preferencable_type": {
+                        "type": "string",
+                        "example": "App\\\\Models\\\\Category"
+                    },
+                    "preferencable": {
+                        "description": "Preferencable object",
+                        "type": "object",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Category"
+                            },
+                            {
+                                "$ref": "#/components/schemas/Author"
+                            },
+                            {
+                                "$ref": "#/components/schemas/Source"
+                            }
+                        ]
+                    }
+                },
+                "type": "object"
+            },
             "Source": {
                 "title": "Source Resource",
                 "description": "Source resource representation",
@@ -645,6 +786,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Preferences",
+            "description": "Preferences"
         }
     ],
     "security": [
