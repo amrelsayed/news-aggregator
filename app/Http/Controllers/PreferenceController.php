@@ -7,7 +7,6 @@ use App\Actions\Preference\SetUserPreferenceAction;
 use App\Http\Requests\AddPreferenceRequest;
 use App\Http\Resources\PreferenceResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Support\Facades\Auth;
 
 class PreferenceController extends Controller
 {

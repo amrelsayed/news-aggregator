@@ -8,14 +8,6 @@ use Illuminate\Support\Facades\Auth;
 class SetUserPreferenceAction
 {
     /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Set user preference
      *
      * @param  array  $data  [preferencable_id, preferencable_type]

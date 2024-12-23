@@ -8,14 +8,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class ListArticlesAction
 {
     /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Get list of articles with filters
      *
      * @param  array  $filters  ['keyword', 'from_date', 'to_date', 'category_id', 'author_id', 'source_id']
