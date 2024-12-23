@@ -298,6 +298,55 @@
                 ]
             }
         },
+        "/api/newsfeed": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Get user newsfeed",
+                "description": "Get customized user newsfeed based on his preferences",
+                "operationId": "b974adeb25162a8c1c09cf5d8c261abb",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User newsfeed retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Article"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/preferences": {
             "get": {
                 "tags": [

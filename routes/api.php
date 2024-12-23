@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('preferences', [PreferenceController::class, 'store']);
     Route::get('preferences', [PreferenceController::class, 'index']);
+
+    Route::get('newsfeed', action: [NewsFeedController::class, 'index']);
 });
