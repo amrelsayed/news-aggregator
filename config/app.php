@@ -122,4 +122,8 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+    'trusted_hosts' => [
+        'http://localhost',
+        'http://127.0.0.1:8000',
+    ],
 ];
