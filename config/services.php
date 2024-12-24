@@ -37,6 +37,6 @@ return [
 
     'newsapi' => [
         'key' => env('NEWSAPI_KEY'),
-        'url' => env('NEWSAPI_URL')
-    ]
+        'url' => env('NEWSAPI_URL'),
+    ],
 ];

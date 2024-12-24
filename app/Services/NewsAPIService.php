@@ -10,9 +10,7 @@ use Illuminate\Support\Carbon;
 
 class NewsAPIService implements NewsApiServiceInterface
 {
-    public function __construct(private HttpClient $http)
-    {
-    }
+    public function __construct(private HttpClient $http) {}
 
     public function fetchArticles(): array
     {
