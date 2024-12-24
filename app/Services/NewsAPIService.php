@@ -2,14 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Author;
-use App\Models\Category;
-use App\Models\Source;
 use Illuminate\Http\Client\Factory as HttpClient;
 use Illuminate\Support\Carbon;
 
 class NewsAPIService implements NewsApiServiceInterface
 {
+    use NewsAPITrait;
+
     public function __construct(private HttpClient $http) {}
 
     public function fetchArticles(): array
@@ -41,20 +40,5 @@ class NewsAPIService implements NewsApiServiceInterface
                 'source_id' => $this->resolveSourceId($article['source']['name']),
             ];
         }, $articles);
-    }
-
-    private function resolveCategoryId(string $categoryName): int
-    {
-        return Category::firstOrCreate(['name' => $categoryName])->id;
-    }
-
-    private function resolveAuthorId(?string $authorName): int
-    {
-        return Author::firstOrCreate(['name' => $authorName ?? 'Unknown'])->id;
-    }
-
-    private function resolveSourceId(string $sourceName): int
-    {
-        return Source::firstOrCreate(['name' => $sourceName])->id;
     }
 }

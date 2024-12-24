@@ -12,7 +12,7 @@ class NewsAPIServiceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_fetches_and_stores_articles_correctly()
+    public function test_fetches_and_transform_articles_correctly()
     {
         // Mock API response
         $mockApiResponse = [
