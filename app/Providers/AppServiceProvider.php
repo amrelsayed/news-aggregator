@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Services\NewsAPIService;
+use App\Services\NewsApiServiceInterface;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -18,7 +20,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(NewsApiServiceInterface::class, function ($app, $params) {
+            switch ($params['service'] ?? null) {
+                case 'opennews':
+                    // return $app->make(OpenNewsService::class);
+                default:
+                    return $app->make(NewsAPIService::class);
+            }
+        });
     }
 
     /**

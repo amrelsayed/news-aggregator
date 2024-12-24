@@ -17,6 +17,7 @@ class Article extends Model
         'category_id',
         'author_id',
         'source_id',
+        'published_at',
     ];
 
     public function category(): BelongsTo
